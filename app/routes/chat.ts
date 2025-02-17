@@ -3,18 +3,10 @@ import type { Route } from "./+types/chat";
 import { z } from "zod";
 
 const projectIdeaSchema = z.object({
-  projectName: z.string(),
+  bandName: z.string(),
   description: z.string(),
-  keyFeatures: z.array(z.string()),
   targetAudience: z.string(),
-  timeline: z.array(
-    z.object({
-      day: z.number(),
-      tasks: z.array(z.string()),
-    }),
-  ),
-  uiComponentsUsed: z.array(z.string()),
-  mainChallenge: z.string(),
+  songTitles: z.array(z.string()),
 });
 
 export type ProjectIdea = z.infer<typeof projectIdeaSchema>;
@@ -28,7 +20,7 @@ export async function action({ request }: Route.ActionArgs) {
       {
         role: "system" as const,
         content:
-          "You are a hackathon project advisor specialized in web development. Your goal is to generate a creative project idea for a team of 4 students.\n\n" +
+          "You are a music manager. Your goal is to generate a new band.\n\n" +
           "Technical Stack:\n" +
           "- Remix web framework\n" +
           "- MongoDB\n" +
@@ -55,7 +47,7 @@ export async function action({ request }: Route.ActionArgs) {
             {
               role: "assistant" as const,
               content:
-                "Can you provide me with a project idea that you want me to expand?",
+                "Can you provide me with a band name, band concept and three songs?",
             },
             {
               role: "user" as const,
