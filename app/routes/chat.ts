@@ -5,6 +5,10 @@ export async function action() {
     model: "mistral-small-latest",
     messages: [
       {
+        role: "system",
+        content: "Be french",
+      },
+      {
         role: "user",
         content: "Come up with good ideas for a hackathon project",
       },
